@@ -1,5 +1,5 @@
 #target
-NAME = intern
+NAME = test
 
 #compiler
 CXX = c++

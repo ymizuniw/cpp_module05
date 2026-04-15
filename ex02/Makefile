@@ -1,5 +1,5 @@
 #target
-NAME = forms
+NAME = test
 
 #compiler
 CXX = c++

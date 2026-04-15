@@ -1,5 +1,5 @@
 #target
-NAME = bureaucrat
+NAME = test
 
 #compiler
 CXX = c++
