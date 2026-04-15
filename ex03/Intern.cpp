@@ -36,7 +36,6 @@ AForm* Intern::makeForm(std::string form_name, std::string form_target) {
     }
   }
   AForm* form = NULL;
-  // create object of Form with switch statement
   try {
     switch (form_idx) {
       case 0:

@@ -6,7 +6,7 @@ CXX = c++
 #comlile option
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -g -std=c++98
 #includes
-INCDIR = -Iincludes -I.
+INCDIR = -I.
 #srcs
 SRCS = main.cpp Bureaucrat.cpp AForm.cpp  ShrubberyCreationForm.cpp GradeExceptions.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 #objs
