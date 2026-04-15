@@ -1,5 +1,6 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "GradeExceptions.hpp"
 
 AForm::AForm()
     : _name("empty_name"),
@@ -8,9 +9,9 @@ AForm::AForm()
       _grade_to_exec(25) {
   std::cout << "AForm Default Constructor Called" << std::endl;
   if (_grade_to_sign < 1 || _grade_to_exec < 1) {
-    throw AForm::GradeTooHighException();
+    throw GradeTooHighException("AForm::GradeTooHighException");
   } else if (_grade_to_exec > 150 || _grade_to_exec > 150) {
-    throw AForm::GradeTooLowException();
+    throw GradeTooLowException("AForm::GradeTooLowException");
   }
 }
 
@@ -21,9 +22,9 @@ AForm::AForm(std::string name, int grade_to_sign, int grade_to_exec)
       _grade_to_exec(grade_to_exec) {
   std::cout << "AForm Parameterized Constructor Called" << std::endl;
   if (grade_to_sign < 1 || grade_to_exec < 1) {
-    throw AForm::GradeTooHighException();
+    throw GradeTooHighException("AForm::GradeTooHighException");
   } else if (grade_to_sign > 150 || grade_to_exec > 150) {
-    throw AForm::GradeTooLowException();
+    throw GradeTooLowException("AForm::GradeTooLowException");
   }
 }
 
@@ -35,7 +36,7 @@ AForm::AForm(const AForm& other)
   std::cout << "AForm Copy Constructor Called" << std::endl;
 }
 
-AForm& AForm::operator=(AForm& other) {
+AForm& AForm::operator=(const AForm& other) {
   if (&other == this) {
     return *this;
   }
@@ -44,14 +45,6 @@ AForm& AForm::operator=(AForm& other) {
 }
 
 AForm::~AForm() { std::cout << "AForm Destructor Called" << std::endl; }
-
-char const* AForm::GradeTooHighException::what() const throw() {
-  return ("AForm::GradeTooHighException");
-}
-
-char const* AForm::GradeTooLowException::what() const throw() {
-  return ("AForm::GradeTooLowException");
-}
 
 std::string AForm::getName() const { return (_name); }
 
@@ -71,7 +64,7 @@ std::ostream& operator<<(std::ostream& out, AForm& form) {
 
 void AForm::beSigned(Bureaucrat& bureau) {
   if (bureau.getGrade() > getGradeToSign()) {
-    throw AForm::GradeTooLowException();
+    throw GradeTooLowException("AForm::GradeTooLowException");
   }
   if (getSigned() == false) _signed = true;
 }

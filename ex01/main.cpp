@@ -213,7 +213,7 @@ int test_01(void) {
     int exception_occurred = 0;
     try {
       Form f1("f1", 0, 1);
-    } catch (const Form::GradeTooHighException& e) {
+    } catch (const std::exception& e) {
       exception_occurred = 1;
       if (std::string(e.what()) != "Form::GradeTooHighException") {
         std::cerr << "Unexpected Exception is thrown" << std::endl;
@@ -235,7 +235,7 @@ int test_01(void) {
     int exception_occurred = 0;
     try {
       Form f1("f1", 151, 1);
-    } catch (const Form::GradeTooLowException& e) {
+    } catch (const std::exception& e) {
       exception_occurred = 1;
       if (std::string(e.what()) != "Form::GradeTooLowException") {
         std::cerr << "Unexpected Exception is thrown" << std::endl;
@@ -259,7 +259,7 @@ int test_01(void) {
         Form       f1("f1", 75, 75);
         try {
           f1.beSigned(br1);
-        } catch (const Form::GradeTooLowException& e) {
+        } catch (const std::exception& e) {
           exception_occurred = 1;
           if (std::string(e.what()) != "Form::GradeTooLowException") {
             std::cerr << "Unexpected Exception is thrown" << std::endl;

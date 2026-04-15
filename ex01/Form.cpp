@@ -1,6 +1,7 @@
 #include "Form.hpp"
 
 #include "Bureaucrat.hpp"
+#include "GradeExceptions.hpp"
 
 Form::Form()
     : _name("empty_name"),
@@ -9,9 +10,9 @@ Form::Form()
       _grade_to_exec(25) {
   std::cout << "Form Default Constructor Called" << std::endl;
   if (_grade_to_sign < 1 || _grade_to_exec < 1) {
-    throw Form::GradeTooHighException();
+    throw GradeTooHighException("Form::GradeTooHighException");
   } else if (_grade_to_exec > 150 || _grade_to_exec > 150) {
-    throw Form::GradeTooLowException();
+    throw GradeTooLowException("Form::GradeTooLowException");
   }
 }
 
@@ -22,9 +23,9 @@ Form::Form(std::string name, int grade_to_sign, int grade_to_exec)
       _grade_to_exec(grade_to_exec) {
   std::cout << "Form Parameterized Constructor Called" << std::endl;
   if (grade_to_sign < 1 || grade_to_exec < 1) {
-    throw Form::GradeTooHighException();
+    throw GradeTooHighException("Form::GradeTooHighException");
   } else if (grade_to_sign > 150 || grade_to_exec > 150) {
-    throw Form::GradeTooLowException();
+    throw GradeTooLowException("Form::GradeTooLowException");
   }
 }
 
@@ -46,14 +47,6 @@ Form& Form::operator=(const Form& other) {
 
 Form::~Form() { std::cout << "Form Destructor Called" << std::endl; }
 
-char const* Form::GradeTooHighException::what() const throw() {
-  return ("Form::GradeTooHighException");
-}
-
-char const* Form::GradeTooLowException::what() const throw() {
-  return ("Form::GradeTooLowException");
-}
-
 std::string Form::getName() const { return (_name); }
 
 bool Form::getSigned() const { return (_signed); }
@@ -72,7 +65,7 @@ std::ostream& operator<<(std::ostream& out, Form& form) {
 
 void Form::beSigned(Bureaucrat& bureau) {
   if (bureau.getGrade() > getGradeToSign()) {
-    throw Form::GradeTooLowException();
+    throw GradeTooLowException("Form::GradeTooLowException");
   }
   if (getSigned() == false) _signed = true;
 }
