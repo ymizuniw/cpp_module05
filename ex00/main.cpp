@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "Bureaucrat.hpp"
+#include "GradeExceptions.hpp"
 
 int main(void) {
   // OCF test
@@ -59,7 +60,7 @@ int main(void) {
       int exception_occurred = 0;
       try {
         Bureaucrat br1("br1", 0);
-      } catch (const Bureaucrat::GradeTooHighException& e) {
+      } catch (const GradeTooHighException& e) {
         exception_occurred = 1;
         if (std::string(e.what()) != "Bureaucrat::GradeTooHighException") {
           std::cerr << "Unexpected Exception is thrown" << std::endl;
@@ -80,7 +81,7 @@ int main(void) {
       std::cout << "\n==GradeTooLowException Test==" << std::endl;
       try {
         Bureaucrat br1("br1", 151);
-      } catch (const Bureaucrat::GradeTooLowException& e) {
+      } catch (const GradeTooLowException& e) {
         exception_occurred = 1;
         if (std::string(e.what()) != "Bureaucrat::GradeTooLowException") {
           std::cerr << "Unexpected Exception is thrown" << std::endl;
@@ -103,7 +104,7 @@ int main(void) {
       try {
         Bureaucrat br1("br1", 1);
         br1.incrementGrade();
-      } catch (const Bureaucrat::GradeTooHighException& e) {
+      } catch (const GradeTooHighException& e) {
         exception_occurred = 1;
         if (std::string(e.what()) != "Bureaucrat::GradeTooHighException") {
           std::cerr << "Unexpected Exception is thrown" << std::endl;
@@ -125,7 +126,7 @@ int main(void) {
       try {
         Bureaucrat br1("br1", 150);
         br1.decrementGrade();
-      } catch (const Bureaucrat::GradeTooLowException& e) {
+      } catch (const GradeTooLowException& e) {
         exception_occurred = 1;
         if (std::string(e.what()) != "Bureaucrat::GradeTooLowException") {
           std::cerr << "Unexpected Exception is thrown" << std::endl;

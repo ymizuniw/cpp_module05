@@ -22,15 +22,6 @@ class Bureaucrat {
   void        incrementGrade();
   void        decrementGrade();
   void        signForm(Form& form);
-
-  class GradeTooHighException : public std::exception {
-   public:
-    virtual char const* what() const throw();
-  };
-  class GradeTooLowException : public std::exception {
-   public:
-    virtual char const* what() const throw();
-  };
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& bureau);

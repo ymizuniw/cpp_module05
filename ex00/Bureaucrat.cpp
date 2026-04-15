@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "GradeExceptions.hpp"
+
 Bureaucrat::Bureaucrat() : _name("empty_name"), _grade(1) {
   std::cout << "Bureaucrat Default Constructor Called" << std::endl;
 }
@@ -9,9 +11,9 @@ Bureaucrat::Bureaucrat() : _name("empty_name"), _grade(1) {
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name) {
   std::cout << "Bureaucrat Parameterized Constructor Called" << std::endl;
   if (grade < 1) {
-    throw(Bureaucrat::GradeTooHighException());
+    throw(GradeTooHighException("Bureaucrat::GradeTooHighException"));
   } else if (150 < grade) {
-    throw(Bureaucrat::GradeTooLowException());
+    throw(GradeTooLowException("Bureaucrat::GradeTooLowException"));
   }
   this->_grade = grade;
 }
@@ -38,28 +40,20 @@ std::ostream& operator<<(std::ostream& out, const Bureaucrat& bureau) {
   return out;
 }
 
-char const* Bureaucrat::GradeTooHighException::what() const throw() {
-  return ("Bureaucrat::GradeTooHighException");
-}
-
-char const* Bureaucrat::GradeTooLowException::what() const throw() {
-  return ("Bureaucrat::GradeTooLowException");
-}
-
 std::string Bureaucrat::getName() const { return (this->_name); }
 
 int Bureaucrat::getGrade() const { return (this->_grade); }
 
 void Bureaucrat::incrementGrade() {
   if (this->_grade == 1) {
-    throw(Bureaucrat::GradeTooHighException());
+    throw(GradeTooHighException("Bureaucrat::GradeTooHighException"));
   }
   this->_grade--;
 }
 
 void Bureaucrat::decrementGrade() {
   if (this->_grade == 150) {
-    throw(Bureaucrat::GradeTooLowException());
+    throw(GradeTooLowException("Bureaucrat::GradeTooLowException"));
   }
   this->_grade++;
 }

@@ -8,7 +8,7 @@ CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 #includes
 INCDIR = -I.
 #srcs
-SRCS = main.cpp Bureaucrat.cpp Form.cpp
+SRCS = main.cpp Bureaucrat.cpp Form.cpp GradeExceptions.cpp
 #objs
 OBJS=$(SRCS:.cpp=.o)
 
