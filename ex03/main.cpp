@@ -5,6 +5,7 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include "GradeExceptions.hpp"
+#include "Intern.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
@@ -378,12 +379,86 @@ int test_02(void) {
   return (0);
 }
 
+int test_03(void) {
+  // Intern OCF test
+  {
+    std::cout << "\n==Intern default Constructor Test==" << std::endl;
+    Intern in1;
+
+    std::cout << "\n==Intern Copy Constructor Test==" << std::endl;
+    Intern in2(in1);
+
+    std::cout << "\n==Intern Copy Assignment Operator Test==" << std::endl;
+    Intern in3;
+    in3 = in1;
+
+    std::cout << "\n==Intern Destructor Test==" << std::endl;
+  }
+  // Intern Basic function test
+  {
+    std::cout << "==Intern Basic Function Test==" << std::endl;
+
+    //==Create ShrubberyCreationForm Test==
+    std::cout << "==Create ShrubberyCreationForm Test==" << std::endl;
+    Intern in1;
+    try {
+      AForm*     sf1 = in1.makeForm("ShrubberyCreationForm", "target1");
+      Bureaucrat br1("br1", 1);
+      sf1->beSigned(br1);
+      sf1->execute(br1);
+    } catch (const std::exception& e) {
+      std::cout << e.what() << std::endl;
+      std::cout << "Intern ShrubberyCreationForm Test failed!" << std::endl;
+      return (1);
+    }
+    std::cout << "==Create RobotomyRequestForm Test==" << std::endl;
+    AForm*     rf1 = in1.makeForm("RobotomyRequestForm", "target2");
+    Bureaucrat br2("br2", 1);
+    try {
+      rf1->beSigned(br2);
+      rf1->execute(br2);
+    } catch (const std::exception& e) {
+      std::cout << e.what() << std::endl;
+      std::cout << "Intern RobotomyRequestForm Test failed!" << std::endl;
+      delete rf1;
+      return (1);
+    }
+    std::cout << "==Create PresidentialPardonForm Test==" << std::endl;
+    AForm*     pf1 = in1.makeForm("PresidentialPardonForm", "target3");
+    Bureaucrat br3("br3", 1);
+    try {
+      pf1->beSigned(br3);
+      pf1->execute(br3);
+    } catch (const std::exception& e) {
+      std::cout << e.what() << std::endl;
+      std::cout << "Intern PresidentialPardonForm Test failed!" << std::endl;
+      delete pf1;
+      return (1);
+    }
+  }
+  // Invalid Form Test
+  {
+    Intern in1;
+    std::cout << "==Invalid makeForm() Test==" << std::endl;
+    AForm* pf1 = in1.makeForm("InvalidForm", "target3");
+    if (pf1) {
+      std::cerr << "Invalid makeForm() Test failed!" << std::endl;
+      return (1);
+    }
+  }
+  std::cout << "Test_03 is passed!" << std::endl;
+  return (0);
+}
+
 int main(void) {
   if (test_00() != 0) {
     std::cout << "Test_00 Failed!" << std::endl;
     return (1);
   } else if (test_02() != 0) {
     std::cout << "Test_02 Failed!" << std::endl;
+    return (1);
+  } else if (test_03() != 0) {
+    std::cout << "Test_03 Failed!" << std::endl;
     return (1);
   }
   return (0);

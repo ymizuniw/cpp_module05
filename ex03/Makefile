@@ -1,5 +1,5 @@
 #target
-NAME = forms
+NAME = intern
 
 #compiler
 CXX = c++
@@ -8,7 +8,7 @@ CXXFLAGS = -Wall -Wextra -Werror -pedantic -g -std=c++98
 #includes
 INCDIR = -Iincludes -I.
 #srcs
-SRCS = main.cpp Bureaucrat.cpp AForm.cpp  ShrubberyCreationForm.cpp GradeExceptions.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+SRCS = main.cpp Bureaucrat.cpp AForm.cpp  ShrubberyCreationForm.cpp GradeExceptions.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 #objs
 OBJS=$(SRCS:.cpp=.o)
 
